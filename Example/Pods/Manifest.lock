@@ -1,0 +1,27 @@
+PODS:
+  - Nimble (8.0.2)
+  - PrincipleAnimation (0.1.0)
+  - Quick (2.1.0)
+
+DEPENDENCIES:
+  - Nimble (~> 8.0.2)
+  - PrincipleAnimation (from `../`)
+  - Quick (~> 2.1.0)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Nimble
+    - Quick
+
+EXTERNAL SOURCES:
+  PrincipleAnimation:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  Nimble: 622629381bda1dd5678162f21f1368cec7cbba60
+  PrincipleAnimation: bdb4e23288fa0ee66044369914959c5aca8033e3
+  Quick: 4be43f6634acfa727dd106bdf3929ce125ffa79d
+
+PODFILE CHECKSUM: fa2d0153aba761a37fdae2ad71176c491cee8d06
+
+COCOAPODS: 1.6.0.beta.1

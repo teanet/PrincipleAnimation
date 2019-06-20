@@ -1,0 +1,12 @@
+use_frameworks!
+
+target 'PrincipleAnimation_Example' do
+  pod 'PrincipleAnimation', :path => '../'
+
+  target 'PrincipleAnimation_Tests' do
+    inherit! :search_paths
+
+    pod 'Quick', '~> 2.1.0'
+    pod 'Nimble', '~> 8.0.2'
+  end
+end
