@@ -15,4 +15,8 @@ public class Animation {
 		}
 	}
 
+	public static func start(duration: TimeInterval, animation: (Animator) -> Void) {
+		self.start(duration: duration, animation: animation, completion: nil)
+	}
+
 }
