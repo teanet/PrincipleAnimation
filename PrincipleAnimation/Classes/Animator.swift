@@ -7,8 +7,8 @@ public class Animator {
 		case physicSpring(tension: CGFloat, friction: CGFloat)
 		var options: UIView.AnimationOptions {
 			switch self {
-			case .linear: return .curveLinear
-			default: return []
+				case .linear: return .curveLinear
+				default: return []
 			}
 		}
 	}
@@ -22,20 +22,28 @@ public class Animator {
 		self.add(duration: self.duration * relativeDuration, delay: self.duration * withRelativeStartTime, curve: curve, block: block)
 	}
 
-	public func add(duration: TimeInterval, delay: TimeInterval = 0, curve: Curve = .linear, completion: ((Bool) -> Void)? = nil, block: @escaping () -> Void) {
+	public func add(
+		duration: TimeInterval,
+		delay: TimeInterval = 0,
+		curve: Curve = .linear,
+		options: UIView.AnimationOptions = [],
+		completion: ((Bool) -> Void)? = nil,
+		block: @escaping () -> Void
+	) {
 		if case .timingFunction(let function) = curve {
 			CATransaction.begin()
 			CATransaction.setAnimationTimingFunction(function)
 		}
 		switch curve {
-		case .spring(let damping):
-			UIView.animate(withDuration: duration, delay: delay, usingSpringWithDamping: damping, initialSpringVelocity: 0, options: [], animations: block, completion: completion)
-		case .physicSpring(let tension, let friction):
-			let damping = self.dampingRatio(tension: tension, friction: friction)
-			let duration = self.duration(tension: tension, friction: friction)
-			UIView.animate(withDuration: duration, delay: delay, usingSpringWithDamping: damping, initialSpringVelocity: 0, options: [], animations: block, completion: completion)
-		default:
-			UIView.animate(withDuration: duration, delay: delay, options: curve.options, animations: block, completion: completion)
+			case .spring(let damping):
+				UIView.animate(withDuration: duration, delay: delay, usingSpringWithDamping: damping, initialSpringVelocity: 0, options: options, animations: block, completion: completion)
+			case .physicSpring(let tension, let friction):
+				let damping = self.dampingRatio(tension: tension, friction: friction)
+				let duration = self.duration(tension: tension, friction: friction)
+				UIView.animate(withDuration: duration, delay: delay, usingSpringWithDamping: damping, initialSpringVelocity: 0, options: options, animations: block, completion: completion)
+			default:
+				let options = curve.options.union(options)
+				UIView.animate(withDuration: duration, delay: delay, options: options, animations: block, completion: completion)
 		}
 		if case .timingFunction(_) = curve {
 			CATransaction.commit()
