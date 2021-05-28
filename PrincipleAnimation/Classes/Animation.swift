@@ -1,3 +1,5 @@
+import UIKit
+
 public class Animation {
 
 	public static func start(duration: TimeInterval, animation: (Animator) -> Void, completion: ((Bool) -> Void)?) {

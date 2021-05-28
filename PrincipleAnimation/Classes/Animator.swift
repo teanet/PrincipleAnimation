@@ -1,3 +1,5 @@
+import UIKit
+
 public class Animator {
 
 	public enum Curve {
